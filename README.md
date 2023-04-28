@@ -1,2 +1,2 @@
-# Kazakh-Speech-Commands
-Kazakh Speech Commands Recognition 
+# Kazakh-Speech-Commands-Dataset
+The dataset, source code, and pretrained model will be uploaded soon :)
