@@ -1,5 +1,11 @@
 # Kazakh-Speech-Commands-Dataset
-The dataset, source code, and pretrained models will be uploaded soon :)
+The Kazakh Speech Commands Benchmark dataset and the details of training & testing of the model can be found in the [Keyword-MLP](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/tree/main/Keyword-MLP) directory. 
+
+The source code of the followings will be uploaded soon:
+- Synthetic Data Generation using Text-To-Speech Models
+- Speech Corpus Scraping using a Speech Recognition Model
+- Conversion of a PyTorch Model (.pth) to ONNX and TensorFlow Lite  
+- End-To-End Pipeline: Data Generation, Model Training & Evaluation, and Deployment on an Edge Device
 
 ## Preprint 
 [Speech Command Recognition: Text-to-Speech and Speech Corpus Scraping Are All You Need](https://www.techrxiv.org/articles/preprint/Speech_Command_Recognition_Text-to-Speech_and_Speech_Corpus_Scraping_Are_All_You_Need/22717657)
