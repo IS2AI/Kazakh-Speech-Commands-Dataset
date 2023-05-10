@@ -1,10 +1,6 @@
 # Keyword-MLP
 
-Official PyTorch implementation of [*Attention-Free Keyword Spotting*](https://arxiv.org/abs/2110.07749v1).
-
-<img src="resources/kw-mlp.png" alt="Keyword-MLP Architecture" width="400"/>
-
-<a href="https://colab.research.google.com/github/AI-Research-BD/Keyword-MLP/blob/main/notebooks/keyword_mlp_tutorial.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab"/></a>
+In this project, we used [Keyword-MLP](https://github.com/AI-Research-BD/Keyword-MLP) model to develop a Kazakh Speech Commands Recognition. We sincerely thank the authors for open sourcing the code. 
 
 ## Setup
 
@@ -13,86 +9,115 @@ pip install -r requirements.txt
 ```
 
 ## Dataset
-To download the Google Speech Commands V2 dataset, you may run the provided bash script as below. This would download and extract the dataset to the "destination path" provided.
+The Kazakh Speech Commands Benchmark (KSCB) dataset can be downloaded from [Google Drive](https://drive.google.com/file/d/1b2K8cU5rTTQutpibx-cPUF4smXodohEt/view?usp=share_link). The recordings are saved in a WAV format with a sampling rate of 16 kHz. In total, 119 participants (62 males, 57 females) from different regions of Kazakhstan took part in data collection. The collected dataset underwent a manual evaluation by moderators to remove any subpar samples, including incomplete or incorrect readings, as well as quiet or silent recordings. The statistics of the collected dataset are provided below.
 
-```
-sh ./download_gspeech_v2.sh <destination_path>
-```
+|ID| Command (kk)|Command (en)|# samples|
+|--|--------|--------|---|
+|1| backward | артқа | 113 |
+|2| forward	| алға | 112  |
+|3| right	| оңға | 106 | 
+|4| left | солға | 104 | 
+|5| down | төмен | 102 |
+|6| up	 | жоғары | 104 | 
+|7| go	 | жүр  | 101 |
+|8| stop | тоқта | 107 |
+|9| on	| қос	| 101 |
+|10| off	| өшір	| 105 |
+|11| yes	| иә | 110 |
+|12| no	| жоқ	| 107 |
+|13| learn | үйрен | 108 |	
+|14| follow	| орында | 104 |
+|15| zero	| нөл	| 105 |
+|16| one	| бір	| 107 |
+|17| two	| екі	| 99 |
+|18| three	| үш | 107 |
+|19| four	| төрт | 97 |
+|20| five	| бес	| 104 |
+|21| six	| алты | 101 |	
+|22| seven	| жеті | 103 |
+|23| eight	| сегіз	| 103 |
+|24| nine	| тоғыз	| 100 |
+|25| bed	| төсек	| 97 |
+|26| bird	| құс	| 96 |
+|27| cat	| мысық	| 97 |
+|28| dog	| ит | 102 |
+|29| happy	| бақытты	| 101 |
+|30| house	| үй | 107 |
+|31| read	| оқы	| 105 |
+|32| write	| жаз	| 105 |
+|33| tree	| ағаш | 104 |
+|34| visual |	көрнекі	| 100 |
+|35| wow	| мәссаған	| 99|
+
+
 
 ## Training
 
-The Speech Commands V2 dataset provides two files: `validation_list.txt` and `testing_list.txt`. Run:
+To train the model on the synthetically generated (Text-To-Speech) dataset + scraped Kazakh Speech Corpus 2 dataset, download and unzip the combined dataset from Google Drive, update the configuration file ```configs/kwmlp_ksc_tts.yaml``` and run the following script on your terminal:
 
 ```
-python make_data_list.py -v <path/to/validation_list.txt> -t <path/to/testing_list.txt> -d <path/to/dataset/root> -o <output dir>
+python train.py --conf configs/kwmlp_ksc_tts.yaml
 ```
 
-This will create the files `training_list.txt`, `validation_list.txt`, `testing_list.txt` and `label_map.json` at the specified output directory. 
+As an alternative option, you can use ```train_kscd.ipynb``` notebook.
 
-Running `train.py` is fairly straightforward. Only a path to a config file is required. Inside the config file, you'll need to add the paths to the .txt files and the label_map.json file created above.
 
+## Testing
+
+You can use test the pre-trained model (or a model you trained) on the KSCB dataset as follows:
 ```
-python train.py --conf path/to/config.yaml
-```
-
-Refer to the [example config](sample_configs/base_config.yaml) to see how the config file looks like, and see the [config explanation](docs/config_file_explained.md) for a complete rundown of the various config parameters. You may also take a look at the [colab tutorial](#tutorials) for a live example.
-
-
-## Inference
-
-You can use the pre-trained model (or a model you trained) for inference, using the two scripts:
-
-- `inference.py`: For short ~1s clips, like the audios in the Speech Commands dataset
-- `window_inference.py`: For running inference on longer audio clips, where multiple keywords may be present. Runs inference on the audio in a sliding window manner.
-
-```
-python inference.py --conf sample_configs/base_config.yaml \
-                    --ckpt <path to pretrained_model.ckpt> \
-                    --inp <path to audio.wav / path to audio folder> \
-                    --out <output directory> \
+python inference.py --conf configs/kwmlp_ksc_tts.yaml \
+                    --ckpt runs/kw-mlp-0.2.0-ksc-tts/best.pth \
+                    --inp data/ \
+                    --out outputs/ksc_tts/ \
                     --lmap label_map.json \
-                    --device cpu \
-                    --batch_size 8   # should be possible to use much larger batches if necessary, like 128, 256, 512 etc.
-
-!python window_inference.py --conf sample_configs/base_config.yaml \
-                    --ckpt <path to pretrained_model.ckpt> \
-                    --inp <path to audio.wav / path to audio folder> \
-                    --out <output directory> \
-                    --lmap label_map.json \
-                    --device cpu \
-                    --wlen 1 \
-                    --stride 0.5 \
-                    --thresh 0.85 \
-                    --mode multi
+                    --device cpu \  # use cuda if you have a GPU
+                    --batch_size 32 # should be possible to use much larger batches if necessary, like 128, 256, 512 etc.
 ```
+```
+python results.py --preds outputs/ksc_tts/preds.json
+```
+The last script outputs a classification report and a confusion matrix. As an alternative option, you can use ```test_kscd.ipynb```
+```
+              precision    recall  f1-score   support
 
-For a detailed usage example, check the [colab tutorial](#tutorials).
+    backward     0.9397    0.9646    0.9520       113
+         bed     0.9684    0.9485    0.9583        97
+        bird     0.7642    0.8438    0.8020        96
+         cat     0.9314    0.9794    0.9548        97
+         dog     0.6497    1.0000    0.7876       102
+        down     0.8972    0.9412    0.9187       102
+       eight     0.9802    0.9612    0.9706       103
+        five     0.9894    0.8942    0.9394       104
+      follow     0.9083    0.9519    0.9296       104
+     forward     0.8750    0.8750    0.8750       112
+        four     0.9487    0.7629    0.8457        97
+          go     0.8349    0.9010    0.8667       101
+       happy     0.9688    0.9208    0.9442       101
+       house     1.0000    0.5607    0.7186       107
+       learn     0.8750    0.9074    0.8909       108
+        left     0.8704    0.9038    0.8868       104
+        nine     0.9783    0.9000    0.9375       100
+          no     1.0000    0.9065    0.9510       107
+         off     1.0000    0.9143    0.9552       105
+          on     0.7818    0.8515    0.8152       101
+         one     0.9195    0.7477    0.8247       107
+        read     0.6757    0.9524    0.7905       105
+       right     0.8351    0.7642    0.7980       106
+       seven     1.0000    0.8932    0.9436       103
+         six     0.9314    0.9406    0.9360       101
+        stop     0.9417    0.9065    0.9238       107
+       three     1.0000    0.9065    0.9510       107
+        tree     0.9804    0.9615    0.9709       104
+         two     0.8936    0.8485    0.8705        99
+          up     0.9677    0.8654    0.9137       104
+      visual     0.9091    1.0000    0.9524       100
+         wow     0.9510    0.9798    0.9652        99
+       write     0.9043    0.9905    0.9455       105
+         yes     0.8189    0.9455    0.8776       110
+        zero     0.9175    0.8476    0.8812       105
 
-## Tutorials
-- [Tutorial: [Using pretrained model | Inference scripts | Training]](notebooks/keyword_mlp_tutorial.ipynb)
-    - <a href="https://colab.research.google.com/github/AI-Research-BD/Keyword-MLP/blob/main/notebooks/keyword_mlp_tutorial.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab"/></a>
-
-## Weights & Biases
-
-You can optionally log your training runs with [wandb](https://wandb.ai/site). You may provide a path to a file containing your API key, or use the `WANDB_API_KEY` env variable, or simply provide it manually from a login prompt when you start your training.
-
-<img src="resources/wandb.png" alt="W&B Dashboard" width="700"/>
-
-## Pretrained Checkpoints
-
-| Model Name | # Params | GFLOPS | Accuracy (V2-35) | Link |
-| ---------- | -------- | ------ | ---------------- | ---- |
-| KW-MLP     |   424K   | 0.045  |       97.56      |  [kw-mlp (1.7MB)](https://drive.google.com/uc?id=1lywXTaJjPud41f3G_NmuRHzhDY8uNbWe&export=download)  |
-
-## Citation
-
-```bibtex
-@misc{morshed2021attentionfree,
-      title   = {Attention-Free Keyword Spotting}, 
-      author  = {Mashrur M. Morshed and Ahmad Omar Ahsan},
-      year    = {2021},
-      eprint  = {2110.07749},
-      archivePrefix = {arXiv},
-      primaryClass  = {cs.LG}
-}
+    accuracy                         0.8979      3623
+   macro avg     0.9088    0.8982    0.8984      3623
+weighted avg     0.9089    0.8979    0.8983      3623
 ```
