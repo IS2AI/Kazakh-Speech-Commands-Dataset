@@ -53,7 +53,7 @@ The Kazakh Speech Commands Benchmark (KSCB) dataset can be downloaded from [Goog
 
 ## Training
 
-To train the model on the synthetically generated (Text-To-Speech) dataset + scraped Kazakh Speech Corpus 2 dataset, download and unzip the combined dataset from Google Drive, update the configuration file ```configs/kwmlp_ksc_tts.yaml``` and run the following script on your terminal:
+To train the model on the synthetically generated (Text-To-Speech) dataset + scraped Kazakh Speech Corpus 2 dataset, download the combined dataset from [Google Drive](https://drive.google.com/file/d/1tMiXB5vWqn8RgrmvCXCj-NVuDLEQ1E2e/view?usp=share_link) and unzip it inside the Keyword-MLP folder, then update the configuration file ```configs/kwmlp_ksc_tts.yaml``` and run the following script on your terminal:
 
 ```
 python train.py --conf configs/kwmlp_ksc_tts.yaml
@@ -64,7 +64,7 @@ As an alternative option, you can use ```train_kscd.ipynb``` notebook.
 
 ## Testing
 
-You can use test the pre-trained model (or a model you trained) on the KSCB dataset as follows:
+To test the pre-trained model (or a model you trained) on the KSCB dataset, download and unzip the dataset, and run the following scripts:
 ```
 python inference.py --conf configs/kwmlp_ksc_tts.yaml \
                     --ckpt runs/kw-mlp-0.2.0-ksc-tts/best.pth \
