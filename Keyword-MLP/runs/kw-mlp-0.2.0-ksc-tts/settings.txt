@@ -1,0 +1,65 @@
+data_root: ./ksc_tts_data/
+exp:
+  cache: 2
+  device: &id001 !!python/object/apply:torch.device
+  - cuda
+  exp_dir: ./runs
+  exp_name: kw-mlp-0.2.0-ksc-tts
+  log_freq: 20
+  log_to_file: false
+  log_to_stdout: true
+  n_workers: 2
+  pin_memory: true
+  proj_name: torch-kw-mlp-ksc-tts
+  save_dir: ./runs/kw-mlp-0.2.0-ksc-tts
+  val_freq: 1
+  wandb: true
+  wandb_api_key: null
+hparams:
+  audio:
+    center: false
+    hop_length: 160
+    n_fft: 480
+    n_mels: 40
+    sr: 16000
+    win_length: 480
+  augment:
+    spec_aug:
+      freq_mask_width: 15
+      n_freq_masks: 2
+      n_time_masks: 2
+      time_mask_width: 20
+  batch_size: 128
+  device: *id001
+  l_smooth: 0.01
+  model:
+    channels: 1
+    depth: 12
+    dim: 64
+    input_res:
+    - 40
+    - 98
+    num_classes: 35
+    patch_res:
+    - 40
+    - 1
+    pre_norm: false
+    prob_survival: 0.9
+    type: kw-mlp
+  n_epochs: 200
+  optimizer:
+    opt_kwargs:
+      lr: 0.001
+      weight_decay: 0.01
+    opt_type: adamw
+  restore_ckpt: runs/kw-mlp-0.1.0/best.pth
+  scheduler:
+    max_epochs: 140
+    n_warmup: 10
+    scheduler_type: cosine_annealing
+  seed: 0
+  start_epoch: 0
+label_map: ./ksc_tts_data/label_map.json
+test_list_file: ./ksc_tts_data/testing_list.txt
+train_list_file: ./ksc_tts_data/training_list.txt
+val_list_file: ./ksc_tts_data/validation_list.txt
