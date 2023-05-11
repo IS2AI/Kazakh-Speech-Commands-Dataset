@@ -59,7 +59,7 @@ To train the model on the synthetically generated (Text-To-Speech) dataset + scr
 python train.py --conf configs/kwmlp_ksc_tts.yaml
 ```
 
-As an alternative option, you can use ```train_kscd.ipynb``` notebook.
+As an alternative option, you can use [```train_kscd.ipynb```](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/blob/main/Keyword-MLP/train_kscd.ipynb) notebook.
 
 
 ## Testing
@@ -77,7 +77,7 @@ python inference.py --conf configs/kwmlp_ksc_tts.yaml \
 ```
 python results.py --preds outputs/ksc_tts/preds.json
 ```
-The last script outputs a classification report and a confusion matrix. As an alternative option, you can use ```test_kscd.ipynb```
+The last script outputs a classification report and a confusion matrix. As an alternative option, you can use [```test_kscd.ipynb```](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/blob/main/Keyword-MLP/test_kscd.ipynb) notebook.
 ```
               precision    recall  f1-score   support
 
@@ -121,4 +121,4 @@ The last script outputs a classification report and a confusion matrix. As an al
    macro avg     0.9088    0.8982    0.8984      3623
 weighted avg     0.9089    0.8979    0.8983      3623
 ```
-To test the model on randomly selected subsets of the KSCD, you can use ```test_kscd.ipynb``` notebook. 
+To test the model on randomly selected subsets of the KSCD, you can use [```subset_test_kscd.ipynb```](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/blob/main/Keyword-MLP/subset_test_kscd.ipynb) notebook. 
