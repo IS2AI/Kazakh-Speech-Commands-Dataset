@@ -7,7 +7,7 @@ The source code of the followings will be uploaded soon:
 - End-To-End Pipeline: Data Generation, Model Training & Evaluation, and Deployment on an Edge Device
 
 # Speech Corpus Scraping
-In order to automatically extract speech commands from a large-scale speech corpus, we used [Vosk Speech Recognition Toolkit](https://github.com/alphacep/vosk-api/tree/master). The example code is given in ```speech_corpus_scraping.ipynb``` notebook. 
+In order to automatically extract speech commands from a large-scale speech corpus, we used [Vosk Speech Recognition Toolkit](https://github.com/alphacep/vosk-api/tree/master). The example code is given in [```speech_corpus_scraping.ipynb```](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/blob/main/speech_corpus_scraping.ipynb) notebook. 
 
 ## Preprint 
 [Speech Command Recognition: Text-to-Speech and Speech Corpus Scraping Are All You Need](https://www.techrxiv.org/articles/preprint/Speech_Command_Recognition_Text-to-Speech_and_Speech_Corpus_Scraping_Are_All_You_Need/22717657)
