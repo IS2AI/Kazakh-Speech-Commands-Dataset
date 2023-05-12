@@ -4,7 +4,6 @@ The Kazakh Speech Commands Benchmark dataset and the details of training & testi
 The source code of the followings will be uploaded soon:
 - Synthetic Data Generation using Text-To-Speech Models
 - Conversion of a PyTorch Model (.pth) to ONNX and TensorFlow Lite  
-- End-To-End Pipeline: Data Generation, Model Training & Evaluation, and Deployment on an Edge Device
 
 # Speech Corpus Scraping
 In order to automatically extract speech commands from a large-scale speech corpus, we used [Vosk Speech Recognition Toolkit](https://github.com/alphacep/vosk-api/tree/master). The example code is given in [```speech_corpus_scraping.ipynb```](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/blob/main/speech_corpus_scraping.ipynb) notebook. 
