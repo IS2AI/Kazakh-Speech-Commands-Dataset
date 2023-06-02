@@ -77,7 +77,7 @@ python inference.py --conf configs/kwmlp_ksc_tts.yaml \
 ```
 python results.py --preds outputs/ksc_tts/preds.json
 ```
-The last script outputs a classification report and a confusion matrix. As an alternative option, you can use [```test_kscd.ipynb```](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/blob/main/Keyword-MLP/test_kscd.ipynb) notebook.
+The last script outputs a classification report and a confusion matrix. As an alternative option, you can use [```test_kscd.ipynb```](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/blob/main/Keyword-MLP/test_kscd.ipynb) notebook. The model achieves **89.79% accuracy**. 
 ```
               precision    recall  f1-score   support
 
@@ -121,4 +121,66 @@ The last script outputs a classification report and a confusion matrix. As an al
    macro avg     0.9088    0.8982    0.8984      3623
 weighted avg     0.9089    0.8979    0.8983      3623
 ```
-To test the model on randomly selected subsets of the KSCD, you can use [```subset_test_kscd.ipynb```](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/blob/main/Keyword-MLP/subset_test_kscd.ipynb) notebook. 
+## Robust Kazakh Speech Command Recognition Model
+We tested the model on 10 subsets of KSCD, where each subset consisted of randomly selected 40 subjects. The details of this experiment can be found in the [```subset_test_kscd.ipynb```](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/blob/main/Keyword-MLP/subset_test_kscd.ipynb) notebook. The average accuracy of the ten subsets is **89.56%**, which is very close to the accuracy of the whole dataset (**89.79%**). This shows that 40 subjects can represent 119 subjects. In this regard, we selected 69 subjects for training, 10 subjects for validation, and 40 subjects for testing purposes. The training and validation data were augmented as shown in [```process_real_data.ipynb```](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/blob/main/process_real_data.ipynb) notebook to increase the dataset size. The processed dataset ```data_kk``` and the testing set ```test_data_kk``` can be downloaded from [here](https://drive.google.com/file/d/1VOtpzGnQEiipl8NqHBsfv-veWWDp3kRy/view?usp=sharing). After downloading and unzipping the datasets, move them to the ```Keyword-MLP``` folder. Then, run the following script:
+```
+python train.py --conf configs/kwmlp_kscd.yaml
+```
+Then, test the best model on the test set:
+```
+python3 inference.py --conf configs/kwmlp_kscd.yaml \
+                     --ckpt runs/kw-mlp-kscd-0.2.0/best.pth \
+                     --inp test_data_kk/ \
+                     --out outputs/kscd/ \
+                     --lmap data_kk/label_map.json \
+                     --device cpu \  # use cuda if you have a GPU
+                     --batch_size 32 # should be possible to use much larger batches if necessary, like 128, 256, 512 etc.
+```
+
+```
+python results.py --preds outputs/kscd/preds.json
+```
+The best model achieved **97.14%** accuracy on the test set. 
+```
+                precision    recall  f1-score   support
+
+    backward     1.0000    0.9500    0.9744        40
+         bed     1.0000    0.9750    0.9873        40
+        bird     0.8919    0.8250    0.8571        40
+         cat     1.0000    0.9750    0.9873        40
+         dog     0.9756    1.0000    0.9877        40
+        down     1.0000    1.0000    1.0000        40
+       eight     1.0000    1.0000    1.0000        40
+        five     1.0000    1.0000    1.0000        40
+      follow     1.0000    0.9500    0.9744        40
+     forward     0.9302    1.0000    0.9639        40
+        four     1.0000    0.9000    0.9474        40
+          go     0.9302    1.0000    0.9639        40
+       happy     0.9756    1.0000    0.9877        40
+       house     1.0000    0.9750    0.9873        40
+       learn     0.9756    1.0000    0.9877        40
+        left     0.9487    0.9250    0.9367        40
+        nine     0.8889    1.0000    0.9412        40
+          no     1.0000    1.0000    1.0000        40
+         off     0.9756    1.0000    0.9877        40
+          on     0.8462    0.8250    0.8354        40
+         one     0.9737    0.9250    0.9487        40
+        read     0.9756    1.0000    0.9877        40
+       right     0.9024    0.9250    0.9136        40
+       seven     1.0000    1.0000    1.0000        40
+         six     1.0000    0.9750    0.9873        40
+        stop     0.9512    0.9750    0.9630        40
+       three     1.0000    1.0000    1.0000        40
+        tree     1.0000    1.0000    1.0000        40
+         two     1.0000    1.0000    1.0000        40
+          up     1.0000    0.9500    0.9744        40
+      visual     1.0000    1.0000    1.0000        40
+         wow     0.9756    1.0000    0.9877        40
+       write     1.0000    1.0000    1.0000        40
+         yes     1.0000    0.9750    0.9873        40
+        zero     0.9070    0.9750    0.9398        40
+
+    accuracy                         0.9714      1400
+   macro avg     0.9721    0.9714    0.9713      1400
+weighted avg     0.9721    0.9714    0.9713      1400
+```
