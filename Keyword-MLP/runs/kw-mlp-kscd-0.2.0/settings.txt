@@ -1,0 +1,65 @@
+data_root: ./data_kk/
+exp:
+  cache: 2
+  device: &id001 !!python/object/apply:torch.device
+  - cuda
+  exp_dir: ./runs
+  exp_name: kw-mlp-kscd-0.2.0
+  log_freq: 20
+  log_to_file: false
+  log_to_stdout: true
+  n_workers: 2
+  pin_memory: true
+  proj_name: torch-kw-mlp
+  save_dir: ./runs/kw-mlp-kscd-0.2.0
+  val_freq: 1
+  wandb: false
+  wandb_api_key: null
+hparams:
+  audio:
+    center: false
+    hop_length: 160
+    n_fft: 480
+    n_mels: 40
+    sr: 16000
+    win_length: 480
+  augment:
+    spec_aug:
+      freq_mask_width: 7
+      n_freq_masks: 2
+      n_time_masks: 2
+      time_mask_width: 25
+  batch_size: 256
+  device: *id001
+  l_smooth: 0.1
+  model:
+    channels: 1
+    depth: 12
+    dim: 64
+    input_res:
+    - 40
+    - 98
+    num_classes: 35
+    patch_res:
+    - 40
+    - 1
+    pre_norm: false
+    prob_survival: 0.9
+    type: kw-mlp
+  n_epochs: 200
+  optimizer:
+    opt_kwargs:
+      lr: 0.001
+      weight_decay: 0.1
+    opt_type: adamw
+  restore_ckpt: runs/kw-mlp-0.1.0/best.pth
+  scheduler:
+    max_epochs: 140
+    n_warmup: 10
+    scheduler_type: cosine_annealing
+  seed: 0
+  start_epoch: 0
+label_map: ./data_kk/label_map.json
+test_list_file: ./data_kk/testing_list.txt
+train_list_file: ./data_kk/training_list.txt
+val_list_file: ./data_kk/validation_list.txt
