@@ -128,7 +128,7 @@ python train.py --conf configs/kwmlp_kscd.yaml
 ```
 Then, test the best model on the test set:
 ```
-python3 inference.py --conf configs/kwmlp_kscd.yaml \
+python inference.py --conf configs/kwmlp_kscd.yaml \
                      --ckpt runs/kw-mlp-kscd-0.2.0/best.pth \
                      --inp test_data_kk/ \
                      --out outputs/kscd/ \
