@@ -15,6 +15,10 @@ To increase the dataset size further, you can apply audio augmentation methods t
 ## Model training, validation, and testing
 The details of training, validation, and testing of the model can be found in the [Keyword-MLP](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/tree/main/Keyword-MLP) directory. 
 
+## Tutorials
+1. Video tutorials for each step of the project on [our YouTube channel](https://www.youtube.com/playlist?list=PLYwixe_5vr_kpH8_iLBSs4hWDN-50GgGo)
+2. [Small-Footprint Keyword Spotting for low-resource languages](https://www.hackster.io/507878/small-footprint-keyword-spotting-for-low-resource-languages-12d8df?utm_campaign=published_project&utm_medium=email&utm_source=hackster) by Shakhizat Nurgaliyev on [Hackster.io](https://www.hackster.io/507878/small-footprint-keyword-spotting-for-low-resource-languages-12d8df?utm_campaign=published_project&utm_medium=email&utm_source=hackster) 
+
 ## Citation
 ```
 @article{Kuzdeuov2023,
