@@ -11,7 +11,7 @@ pip install -r requirements.txt
 ## Dataset
 The Kazakh Speech Commands Benchmark (KSCB) dataset can be downloaded from [Google Drive](https://drive.google.com/file/d/1wH8V-duOIHjcW8rIfhnCwwTvqA1zEIMS/view?usp=share_link). The recordings are 1 second duration and saved in a WAV format with a sampling rate of 16 kHz. In total, 119 participants (62 males, 57 females) from different regions of Kazakhstan took part in data collection. The collected dataset underwent a manual evaluation by moderators to remove any subpar samples, including incomplete or incorrect readings, as well as quiet or silent recordings. The statistics of the collected dataset are provided below.
 
-|ID| Command (kk)|Command (en)|# samples|
+|ID| Command (en)|Command (kk)|# samples|
 |--|--------|--------|---|
 |1| backward | артқа | 113 |
 |2| forward	| алға | 112  |
