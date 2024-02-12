@@ -3,6 +3,10 @@
 ## Preprint 
 [Speech Command Recognition: Text-to-Speech and Speech Corpus Scraping Are All You Need](https://www.techrxiv.org/articles/preprint/Speech_Command_Recognition_Text-to-Speech_and_Speech_Corpus_Scraping_Are_All_You_Need/22717657)
 
+## Presentation on the 3rd International Conference on Robotics, Automation, and Artificial Intelligence (RAAI 2023) 
+[Speech Command Recognition: Text-to-Speech and Speech Corpus Scraping Are All You Need](https://docs.google.com/presentation/d/1oybWIY0SGu0y97eHZ393TLAyr-Dwy80S9NDIFVCVAnI/edit?usp=sharing)
+
+
 ## Synthetic speech commands generation
 In this project, we used [Piper](https://github.com/rhasspy/piper) to generate synthetic speech commands. Piper is a fast, local neural text to speech system. It provides five voices for the Kazakh language. The list of available models for other languages can be found [here](https://github.com/rhasspy/piper/releases/tag/v0.0.2) and the corresponding demos are given [here](https://rhasspy.github.io/piper-samples/). To generate synthetic speech commands for Kazakh, download and unzip the model from [Google Drive](https://drive.google.com/file/d/1vfSIK_xSh-GY2GeW1_JGcrAba8mdZxpD/view?usp=share_link). Then, open the [```synthetic_data_generation.ipynb```](https://github.com/IS2AI/Kazakh-Speech-Commands-Dataset/blob/main/synthetic_data_generation.ipynb) notebook, update the path to the model, and run all cells.
 
