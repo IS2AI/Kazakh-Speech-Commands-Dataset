@@ -3,6 +3,9 @@
 ## Preprint 
 [Speech Command Recognition: Text-to-Speech and Speech Corpus Scraping Are All You Need](https://www.techrxiv.org/articles/preprint/Speech_Command_Recognition_Text-to-Speech_and_Speech_Corpus_Scraping_Are_All_You_Need/22717657)
 
+## Paper on IEEE
+[Speech Command Recognition: Text-to-Speech and Speech Corpus Scraping Are All You Need](https://ieeexplore.ieee.org/document/10601292)
+
 ## Presentation on the 3rd International Conference on Robotics, Automation, and Artificial Intelligence (RAAI 2023) 
 [Speech Command Recognition: Text-to-Speech and Speech Corpus Scraping Are All You Need](https://docs.google.com/presentation/d/1oybWIY0SGu0y97eHZ393TLAyr-Dwy80S9NDIFVCVAnI/edit?usp=sharing)
 
@@ -24,12 +27,15 @@ Video tutorials for each step of the project on [our YouTube channel](https://ww
 
 ## Citation
 ```
-@article{Kuzdeuov2023,
-author = "Askat Kuzdeuov and Shakhizat Nurgaliyev and Diana Turmakhan and Nurkhan Laiyk and Huseyin Atakan Varol",
-title = "{Speech Command Recognition: Text-to-Speech and Speech Corpus Scraping Are All You Need}",
-year = "2023",
-month = "5",
-url = "https://www.techrxiv.org/articles/preprint/Speech_Command_Recognition_Text-to-Speech_and_Speech_Corpus_Scraping_Are_All_You_Need/22717657",
-doi = "10.36227/techrxiv.22717657.v1"
-}
+@INPROCEEDINGS{10601292,
+  author={Kuzdeuov, Askat and Nurgaliyev, Shakhizat and Turmakhan, Diana and Laiyk, Nurkhan and Varol, Huseyin Atakan},
+  booktitle={2023 3rd International Conference on Robotics, Automation and Artificial Intelligence (RAAI)}, 
+  title={Speech Command Recognition: Text-to-Speech and Speech Corpus Scraping Are All You Need}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={286-291},
+  keywords={Accuracy;Speech coding;Virtual assistants;Speech recognition;Data collection;Benchmark testing;Data models;Speech commands recognition;text-to-speech;Kazakh Speech Corpus;voice commands;data-centric AI},
+  doi={10.1109/RAAI59955.2023.10601292}}
+
 ```
